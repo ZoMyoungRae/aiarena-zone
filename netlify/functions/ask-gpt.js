@@ -1,4 +1,5 @@
 exports.handler = async function(event, context) {
+console.log("📦 환경변수 확인:", process.env.OPENAI_API_KEY);  // 👈 이 한 줄 추가
   const body = JSON.parse(event.body);
   const userQuestion = body.question;
 
