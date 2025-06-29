@@ -25,8 +25,11 @@ exports.handler = async function (event, context) {
             content: userQuestion,
           },
         ],
-        temperature: 0.9,
-        max_tokens: 1024,
+    max_tokens: 1024,            // 🔹 최대 토큰 수 늘리기 (기본: 256~512)
+    temperature: 0.9,            // 🔹 창의적이고 풍성한 응답을 원하면 0.8~1.0
+    top_p: 1,                    // 🔹 확률분포 기반 다양성 조절 (1 = 최대 다양성)
+    frequency_penalty: 0.2,      // 🔹 반복 최소화
+    presence_penalty: 0.3        // 🔹 새로운 주제 유도
       }),
     });
 
