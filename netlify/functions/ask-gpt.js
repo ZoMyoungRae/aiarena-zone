@@ -1,5 +1,6 @@
 exports.handler = async function(event, context) {
-console.log("📦 환경변수 확인:", process.env.OPENAI_API_KEY);  // 👈 이 한 줄 추가
+  console.log("📦 환경변수 확인:", process.env.OPENAI_API_KEY);
+
   const body = JSON.parse(event.body);
   const userQuestion = body.question;
 
@@ -17,15 +18,14 @@ console.log("📦 환경변수 확인:", process.env.OPENAI_API_KEY);  // 👈 �
       ]
     })
   });
-if (!response.ok) {
-  const error = await response.json();
-  return {
-    statusCode: response.status,
-    body: JSON.stringify({
-      error: error.error?.message || "OpenAI 응답 실패"
-    })
-  };
-}
+
+  if (!response.ok) {
+    const error = await response.json();
+    return {
+      statusCode: response.status,
+      body: JSON.stringify({ error: error.error?.message || "OpenAI 응답 실패" })
+    };
+  }
 
   const data = await response.json();
 
@@ -36,5 +36,6 @@ if (!response.ok) {
     })
   };
 };
+
 
 
