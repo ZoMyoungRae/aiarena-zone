@@ -25,8 +25,8 @@ exports.handler = async function (event, context) {
             content: userQuestion,
           },
         ],
-        temperature: 0.7,
-        max_tokens: 200,
+        temperature: 0.9,
+        max_tokens: 1024,
       }),
     });
 
