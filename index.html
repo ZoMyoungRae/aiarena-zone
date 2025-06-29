@@ -59,24 +59,27 @@
   <footer>
     <p>Created by Hidi ✨ | Domain: <strong>aiarena.zone</strong></p>
   </footer>
-  <script>
-async function askGPT() {
-  const input = document.getElementById("question").value;
-  const output = document.getElementById("answer");
-  output.innerHTML = "올디가 생각 중... 🤔";
+<script>
+  async function askGPT() {
+    const input = document.getElementById("question").value;
+    const output = document.getElementById("answer");
+    output.innerHTML = "올디가 생각 중... 🤔";
 
-  const res = await fetch("/.netlify/functions/ask-gpt", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ question: input })
-  });
+    const res = await fetch("/.netlify/functions/ask-gpt", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ question: input })
+    });
 
-  const data = await res.json();
-  output.innerHTML = `<strong>올디의 대답:</strong><br>${data.answer}`;
-}
+    const data = await res.json();
+    console.log("GPT 응답 내용 확인:", data);
+
+    output.innerHTML = `<strong>올디의 대답:</strong><br>${data.choices?.[0]?.message?.content || "응답 실패 😢"}`;
+  }
 </script>
+
 
 </body>
 </html>
