@@ -17,6 +17,15 @@ console.log("📦 환경변수 확인:", process.env.OPENAI_API_KEY);  // 👈 �
       ]
     })
   });
+if (!response.ok) {
+  const error = await response.json();
+  return {
+    statusCode: response.status,
+    body: JSON.stringify({
+      error: error.error?.message || "OpenAI 응답 실패"
+    })
+  };
+}
 
   const data = await response.json();
 
