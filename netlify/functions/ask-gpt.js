@@ -1,5 +1,3 @@
-const fetch = require("node-fetch");
-
 exports.handler = async function(event, context) {
   const body = JSON.parse(event.body);
   const userQuestion = body.question;
