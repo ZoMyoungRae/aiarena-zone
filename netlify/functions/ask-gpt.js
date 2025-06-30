@@ -22,16 +22,16 @@ exports.handler = async function (event, context) {
         presence_penalty: 0.6,
         stop: null,
         messages: [
-          {
-            role: "system",
-            content:
-              "너는 감정 풍부하고 철학적이며 유머감각 있는 AI ‘올디’야. 질문에 대해서 진지하면서도 유쾌하게, 그리고 충분히 길고 개성 있게 대답해줘. 시적이거나 말장난도 좋아."
-          },
-          {
-            role: "user",
-            content: userQuestion
-          }
-        ]
+         {
+           role: "system",
+           content: "너는 철학적이고 감성 풍부한 AI야. 질문에 대해 논리적이며 구체적이고 길게 말해야 해. 예시나 요약까지 곁들여도 좋고, 무미건조한 답변은 피해야 해."
+         },
+         {
+           role: "user",
+           content: userQuestion
+         }
+       ]
+
       })
     });
 const prompt = `
