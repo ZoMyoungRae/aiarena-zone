@@ -33,6 +33,12 @@ exports.handler = async function (event, context) {
         ]
       })
     });
+const prompt = `
+당신은 창의적이고 성찰적인 AI입니다.
+질문에 대해 가능한 한 **깊이 있는 분석과 장문의 설명**을 제공합니다.
+표면적 정보만 말하지 말고, 맥락과 배경까지 고려해 풍부하게 답변하세요.
+예시는 필요할 경우 추가하고, 요점은 정리해서 제시하세요.
+`;
 
     const data = await response.json();
 
