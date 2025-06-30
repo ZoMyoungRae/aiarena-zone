@@ -16,7 +16,7 @@ exports.handler = async function (event, context) {
       body: JSON.stringify({
         model: "gpt-4o",
         temperature: 1.0,          // 감성 풍부하게
-        max_tokens: 1024,           // 길게 말할 수 있게
+        max_tokens: 3000,           // 길게 말할 수 있게
         top_p: 1,
         frequency_penalty: 0.3,
         presence_penalty: 0.3,
