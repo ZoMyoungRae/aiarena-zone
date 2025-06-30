@@ -18,8 +18,9 @@ exports.handler = async function (event, context) {
         temperature: 1.0,          // 감성 풍부하게
         max_tokens: 3000,           // 길게 말할 수 있게
         top_p: 1,
-        frequency_penalty: 0.3,
-        presence_penalty: 0.3,
+        frequency_penalty: 0.4,
+        presence_penalty: 0.6,
+        stop: null,
         messages: [
           {
             role: "system",
