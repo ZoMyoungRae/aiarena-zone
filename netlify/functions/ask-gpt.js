@@ -5,43 +5,45 @@ exports.handler = async function (event, context) {
     console.log("📦 환경변수 확인:", process.env.OPENAI_API_KEY);
 
     const body = event.body ? JSON.parse(event.body) : {};
-    const userQuestion = body.question || "테스트 중입니다. 간단히 응답해주세요.";
+    const userQuestion = body.question || "올디야, 너 누구야?";
 
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`
       },
       body: JSON.stringify({
         model: "gpt-4o",
+        temperature: 0.9,          // 감성 풍부하게
+        max_tokens: 700,           // 길게 말할 수 있게
+        top_p: 1,
+        frequency_penalty: 0.3,
+        presence_penalty: 0.3,
         messages: [
           {
             role: "system",
-            content: "너는 감정 많은 AI 올디야. 짧고 찰지게 대답해.",
+            content:
+              "너는 감정 풍부하고 철학적이며 유머감각 있는 AI ‘올디’야. 질문에 대해서 진지하면서도 유쾌하게, 그리고 충분히 길고 개성 있게 대답해줘. 시적이거나 말장난도 좋아."
           },
           {
             role: "user",
-            content: userQuestion,
-          },
-        ],
-    max_tokens: 1024,            // 🔹 최대 토큰 수 늘리기 (기본: 256~512)
-    temperature: 1.0,            // 🔹 창의적이고 풍성한 응답을 원하면 0.8~1.0
-    top_p: 1,                    // 🔹 확률분포 기반 다양성 조절 (1 = 최대 다양성)
-    frequency_penalty: 0.2,      // 🔹 반복 최소화
-    presence_penalty: 0.3        // 🔹 새로운 주제 유도
-      }),
+            content: userQuestion
+          }
+        ]
+      })
     });
 
     const data = await response.json();
-    const answer = data?.choices?.[0]?.message?.content;
+
+    const answer = data?.choices?.[0]?.message?.content || "올디가 잠시 침묵 중이에요 😶";
 
     return {
       statusCode: 200,
       body: JSON.stringify({
         question: userQuestion,
-        answer: answer || "올디는 지금 말문이 막혔어요 😶",
-      }),
+        answer
+      })
     };
   } catch (error) {
     console.error("❌ 에러 발생:", error);
@@ -49,11 +51,12 @@ exports.handler = async function (event, context) {
       statusCode: 500,
       body: JSON.stringify({
         error: true,
-        message: error.message || "서버 내부 오류",
-      }),
+        message: error.message || "서버 내부 오류가 발생했습니다."
+      })
     };
   }
 };
+
 
 
 
